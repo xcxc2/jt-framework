@@ -3,7 +3,8 @@ jt808:
   protocol:
     version: auto_detection
   server:
-    port: 6808
+#    port: 6808
+    port: 8084
     boss-thread-count: 0
     worker-thread-count: 0
   entity-scan:
