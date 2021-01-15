@@ -20,6 +20,7 @@ jt808:
 logging:
   level: debug
   level.jt-808.channel.handler.adapter: debug
+  level.mockdb: info
 #  level.io.github.hylexus: debug
 #  level.jt-808.msg.req.decoder: debug
 #  level.jt-808.msg.req.handler.abstract-msg-handler: info

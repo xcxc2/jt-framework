@@ -15,6 +15,7 @@ import io.github.hylexus.jt808.samples.annotation.entity.req.demo01.LocationUplo
 import io.github.hylexus.jt808.samples.annotation.entity.resp.RegisterReplyMsgBody;
 import io.github.hylexus.jt808.samples.annotation.entity.resp.ServerCommonReplyMsgBody;
 import io.github.hylexus.jt808.samples.annotation.serivce.TerminalService;
+import io.github.hylexus.jt808.samples.annotation.util.MockDbUtil;
 import io.github.hylexus.jt808.session.Jt808Session;
 import io.github.hylexus.jt808.session.Jt808SessionManager;
 import io.github.hylexus.jt808.session.Session;
@@ -47,10 +48,13 @@ public class CommonHandler {
         log.info("终端注册 terminalId = {}, carIdentifier = {}", header.getTerminalId(), msg.getCarIdentifier());
         log.info("{}", msg.toString());
         //065044634533
-        //todo 
-
+        //todo 记录注册信息 RegisterMsg，
+        // 同时生成设备授权码 authCode, 保存到库中或redis中
+        String terminalId=header.getTerminalId();
+        String authCode=header.getTerminalId();
+        MockDbUtil.save("registerMsg",terminalId,authCode);
         byte result=0;
-        return new RegisterReplyMsgBody(header.getFlowId(), result, "123456");
+        return new RegisterReplyMsgBody(header.getFlowId(), result, authCode);
     }
 
     // 此处会覆盖内置的鉴权消息处理器(如果启用了的话)
@@ -66,6 +70,12 @@ public class CommonHandler {
         assert sessionInfo.get() == abstractSession;
         // 不建议直接使用Session，建议使用Jt808Session
         assert sessionInfo.get() == session;
+
+        //todo 校验 设备标识和授权码是否存在，根据情况返回是否鉴权成功
+        String terminalId = header.getTerminalId();
+        String authCode = msgBody.getAuthCode();
+        MockDbUtil.save("authMsg",terminalId,authCode);
+
         // return CommonReplyMsgBody.success(header.getFlowId(), BuiltinJt808MsgType.CLIENT_AUTH);
         byte result=0;
         return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_AUTH.getMsgId(), result);
@@ -86,6 +96,14 @@ public class CommonHandler {
         assert metadata.getHeader() == header;
 
         log.info("处理位置上报消息 terminalId = {}, msgBody = {}", header.getTerminalId(), msgBody);
+
+        //todo 位置信息入库记录： 设备码ID，经纬度 位置信息
+        String terminalId = header.getTerminalId();
+        Double lat = msgBody.getLat();//纬度
+        Double lng = msgBody.getLng();//经度
+        String time = msgBody.getTime();
+        MockDbUtil.save("locationMsg",terminalId,time,lat,lng);
+
         // return CommonReplyMsgBody.success(header.getFlowId(), BuiltinJt808MsgType.CLIENT_LOCATION_INFO_UPLOAD);
         byte result=0;
         return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_LOCATION_INFO_UPLOAD.getMsgId(), result);

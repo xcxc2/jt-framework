@@ -20,6 +20,11 @@ public enum Jt808MsgType implements MsgType {
     // bug-fix --> https://github.com/hylexus/jt-framework/issues/8
     CLIENT_DATA_UP_TRANSPARENT(0x0900, "数据上行透传"),
     CLIENT_LOCATION_INFO_BATCH_UPLOAD(0x0704, "位置批量上传"),
+
+    CLIENT_COMMON_REPLY(0x0001, "终端通用应答"),
+    RESP_TERMINAL_PARAM_SETTINGS(0x8103, "设置终端参数"),
+    RESP_QUERY_TERMINAL_PROPERTIES(0x8107, "查询终端属性(EMPTY)"),
+    CLIENT_QUERY_TERMINAL_PROPERTIES_REPLY(0x0107, "查询终端属性应答"),
     ;
 
     private static final Map<Integer, Jt808MsgType> mapping = new HashMap<>(values().length);

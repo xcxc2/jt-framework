@@ -26,4 +26,8 @@ dependencies {
 
     provided "io.netty:netty-all:${jar_version_netty}"
     compile "com.google.guava:guava:${jar_version_guava}"
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+
 }

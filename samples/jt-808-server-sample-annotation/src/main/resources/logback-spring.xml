@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="5 minutes">
+    <property name="log.path" value="./logs/" />
+    <property name="log.file" value="logs" />
+    <property name="log.file.db" value="logs-db" />
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d] %-5p [%C{0}.%M:%L] - %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${log.file}.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.file}.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d] %-5p [%C{0}.%M:%L] - %m%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="file-db" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.path}/${log.file.db}.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.file.db}.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>[%d] %-5p [%C{0}.%M:%L] - %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="mockdb" level="DEBUG">
+        <appender-ref ref="console" />
+        <appender-ref ref="file-db" />
+    </logger>
+
+    <root>
+        <appender-ref ref="console" />
+        <appender-ref ref="file" />
+    </root>
+</configuration>
