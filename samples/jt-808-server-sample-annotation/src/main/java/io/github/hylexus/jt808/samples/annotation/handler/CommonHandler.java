@@ -44,8 +44,13 @@ public class CommonHandler {
 
     @Jt808RequestMsgHandlerMapping(msgType = 0x0100, desc = "终端注册")
     public RegisterReplyMsgBody processRegisterMsg(RegisterMsg msg, RequestMsgHeader header) {
-        log.info("{}", msg);
-        return new RegisterReplyMsgBody(header.getFlowId(), (byte) 0, "123456");
+        log.info("终端注册 terminalId = {}, carIdentifier = {}", header.getTerminalId(), msg.getCarIdentifier());
+        log.info("{}", msg.toString());
+        //065044634533
+        //todo 
+
+        byte result=0;
+        return new RegisterReplyMsgBody(header.getFlowId(), result, "123456");
     }
 
     // 此处会覆盖内置的鉴权消息处理器(如果启用了的话)
@@ -62,7 +67,8 @@ public class CommonHandler {
         // 不建议直接使用Session，建议使用Jt808Session
         assert sessionInfo.get() == session;
         // return CommonReplyMsgBody.success(header.getFlowId(), BuiltinJt808MsgType.CLIENT_AUTH);
-        return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_AUTH.getMsgId(), (byte) 0);
+        byte result=0;
+        return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_AUTH.getMsgId(), result);
     }
 
     // 处理MsgId为0x0200的消息
@@ -81,7 +87,8 @@ public class CommonHandler {
 
         log.info("处理位置上报消息 terminalId = {}, msgBody = {}", header.getTerminalId(), msgBody);
         // return CommonReplyMsgBody.success(header.getFlowId(), BuiltinJt808MsgType.CLIENT_LOCATION_INFO_UPLOAD);
-        return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_LOCATION_INFO_UPLOAD.getMsgId(), (byte) 0);
+        byte result=0;
+        return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_LOCATION_INFO_UPLOAD.getMsgId(), result);
     }
 
     @Jt808RequestMsgHandlerMapping(msgType = 0x0900)
@@ -98,7 +105,8 @@ public class CommonHandler {
 
     @Jt808RequestMsgHandlerMapping(msgType = 0x0002)
     public ServerCommonReplyMsgBody processHeatBeatMsg(BuiltinEmptyRequestMsgBody heartBeatMsgBody, RequestMsgHeader header) {
-        return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_HEART_BEAT.getMsgId(), (byte) 0);
+        byte result=0;
+        return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_HEART_BEAT.getMsgId(), result);
     }
 
     //@Jt808RequestMsgHandlerMapping(msgType = 0x0002)
@@ -108,13 +116,15 @@ public class CommonHandler {
 
     @Jt808RequestMsgHandlerMapping(msgType = 0x0704)
     public ServerCommonReplyMsgBody processMsg0704(RequestMsgHeader header, Msg0704 msg) {
+
         return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_LOCATION_INFO_BATCH_UPLOAD.getMsgId(), (byte) 0);
     }
 
     @Jt808RequestMsgHandlerMapping(msgType = 0x0104)
     public ServerCommonReplyMsgBody processMsg0104(Msg0104 msg, RequestMsgHeader header) {
         log.info("processMsg0104: {}", msg);
-        return new ServerCommonReplyMsgBody(header.getFlowId(), REQ_QUERY_LOCK_PARAM_REPLY.getMsgId(), (byte) 0);
+        byte result=0;
+        return new ServerCommonReplyMsgBody(header.getFlowId(), REQ_QUERY_LOCK_PARAM_REPLY.getMsgId(), result);
     }
 
     @Jt808ExceptionHandler

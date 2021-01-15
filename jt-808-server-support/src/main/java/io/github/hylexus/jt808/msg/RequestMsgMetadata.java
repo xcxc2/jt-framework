@@ -4,6 +4,8 @@ import io.github.hylexus.jt.data.msg.MsgType;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.util.Arrays;
+
 /**
  * @author hylexus
  * Created At 2019-09-19 11:35 下午
@@ -21,7 +23,7 @@ public class RequestMsgMetadata {
         return "RequestMsgMetadata{"
                 + "msgType=" + msgType
                 + ", header=" + header
-                //+ ", bodyBytes=" + Arrays.toString(bodyBytes)
+                + ", bodyBytes=" + Arrays.toString(bodyBytes)
                 + ", checkSum=" + checkSum
                 + '}';
     }
