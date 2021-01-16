@@ -34,7 +34,7 @@
     </appender>
 
     <logger name="mockdb" level="DEBUG">
-        <appender-ref ref="console" />
+<!--        <appender-ref ref="console" />-->
         <appender-ref ref="file-db" />
     </logger>
 

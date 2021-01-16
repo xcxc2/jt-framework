@@ -99,10 +99,10 @@ public class CommonHandler {
 
         //todo 位置信息入库记录： 设备码ID，经纬度 位置信息
         String terminalId = header.getTerminalId();
-        Double lat = msgBody.getLat();//纬度
         Double lng = msgBody.getLng();//经度
+        Double lat = msgBody.getLat();//纬度
         String time = msgBody.getTime();
-        MockDbUtil.save("locationMsg",terminalId,time,lat,lng);
+        MockDbUtil.save("locationMsg",terminalId,time,lng,lat);
 
         // return CommonReplyMsgBody.success(header.getFlowId(), BuiltinJt808MsgType.CLIENT_LOCATION_INFO_UPLOAD);
         byte result=0;

@@ -13,12 +13,13 @@ public class TscUtil {
 
 
     /**
-     * * 0x0001 DWORD 终端心跳发送间隔，单位为（s）
-     * * 0x0010 STRING 主服务器 APN ，无线通信拨号访问点。
-     * * 0x0013 STRING 主服务器地址,IP或域名
-     * * 0x0017 STRING 备份服务器地址 ,IP ,IP或域名
-     * * 0x0018 DWORD 服务器TCPTCP
      * <p>
+     * 0x0001 DWORD 终端心跳发送间隔，单位为（s）
+     * 0x0010 STRING 主服务器 APN，无线通信拨号访问点
+     * 0x0013 STRING 主服务器地址,IP或域名
+     * 0x0017 STRING 备份服务器地址,IP或域名
+     * 0x0018 DWORD 服务器TCP端口
+     * </p>
      * dataArr[ key: value:]
      */
     public static RespTerminalSettings getParam8103(JSONArray dataArr) {
@@ -35,8 +36,11 @@ public class TscUtil {
             switch (type.getDataType()) {
                 case "DWORD":
                     item = new RespTerminalSettings.ParamItem(type.getMsgId(), DwordBytesValueWrapper.of(obj.getInteger("value")));
+                    break;
                 case "STRING":
                     item = new RespTerminalSettings.ParamItem(type.getMsgId(), StringBytesValueWrapper.of(obj.getString("value")));
+                    break;
+                default:
                     //todo others
             }
             if (item == null) {

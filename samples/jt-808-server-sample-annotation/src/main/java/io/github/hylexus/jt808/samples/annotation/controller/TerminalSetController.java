@@ -52,10 +52,10 @@ public class TerminalSetController {
      * }
      * <p>
      * 0x0001 DWORD 终端心跳发送间隔，单位为（s）
-     * 0x0010 STRING 主服务器 APN ，无线通信拨号访问点。
+     * 0x0010 STRING 主服务器 APN，无线通信拨号访问点
      * 0x0013 STRING 主服务器地址,IP或域名
-     * 0x0017 STRING 备份服务器地址 ,IP ,IP或域名
-     * 0x0018 DWORD 服务器TCPTCP
+     * 0x0017 STRING 备份服务器地址,IP或域名
+     * 0x0018 DWORD 服务器TCP端口
      *
      * @return
      * @throws Exception
@@ -82,9 +82,13 @@ public class TerminalSetController {
             log.info("set8103 resp: {}", resp);
             MockDbUtil.save("set8103",terminalId, dataArr.toJSONString());
             return Result.doneData(resp);
-        } catch (Exception e) {
+        } catch (JtSessionNotFoundException e) {
             log.info("set8103 err: {}", e.getMessage(), e);
-            return Result.failMessage("失败:" + e.getMessage());
+            return Result.failMessage("失败:设备未连接！");
+        }catch (Exception e) {
+
+            log.info("set8103 err: {}", e.getMessage(), e);
+            return Result.failMessage("失败:"+e.getClass().getSimpleName()+"-" + e.getMessage());
         }
 
     }

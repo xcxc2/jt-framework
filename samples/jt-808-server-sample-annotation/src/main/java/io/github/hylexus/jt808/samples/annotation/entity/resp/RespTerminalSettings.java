@@ -55,17 +55,17 @@ public class RespTerminalSettings {
     @Getter
     public enum ItemType implements MsgType {
         /**
-         * * 0x0001 DWORD 终端心跳发送间隔，单位为s
-         * * 0x0010 STRING 主服务器APN ，无线通信拨号访问点。
-         * * 0x0013 STRING 主服务器地址IP或域名
-         * * 0x0017 STRING 备份服务器地址IP或域名
-         * * 0x0018 DWORD 服务器TCP
+         * 0x0001 DWORD 终端心跳发送间隔，单位为（s）
+         * 0x0010 STRING 主服务器 APN，无线通信拨号访问点
+         * 0x0013 STRING 主服务器地址,IP或域名
+         * 0x0017 STRING 备份服务器地址,IP或域名
+         * 0x0018 DWORD 服务器TCP端口
          */
         heart(0x0001, "DWORD", "终端心跳发送间隔，单位为s"),
         apn(0x0010, "STRING", "主服务器APN"),
         ip_main(0x0013, "STRING", "主服务器地址IP或域名"),
         ip_second(0x0017, "STRING", "备份服务器地址IP或域名"),
-        ip_port(0x0018, "DWORD", "服务器TCP"),
+        ip_port(0x0018, "DWORD", "服务器TCP端口"),
 
         ;
 
