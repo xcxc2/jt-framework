@@ -28,8 +28,8 @@ public class Result<T> {
      */
     private T data;
 
-    public static Result build(CodeEnum codeEnum) {
-        Result result = new Result();
+    public static <T> Result<T> build(CodeEnum codeEnum) {
+        Result<T> result = new Result<T>();
         result.setCode(codeEnum.code);
         result.setMessage(codeEnum.text);
 
@@ -41,8 +41,8 @@ public class Result<T> {
         return result;
     }
 
-    public static  Result build(CodeEnum codeEnum, String message) {
-        Result result = Result.build(codeEnum);
+    public static <T> Result<T> build(CodeEnum codeEnum, String message) {
+        Result<T> result = Result.build(codeEnum);
         if (message != null && !"".equals(message)) {
             result.setMessage(message);
         }
@@ -69,8 +69,18 @@ public class Result<T> {
         return Result.build(CodeEnum.SUCCESS);
     }
 
+    public static <T> Result<T> done(String message, T data) {
+        return Result.build(CodeEnum.SUCCESS, message, data);
+
+    }
+
     public static Result fail() {
         return Result.build(CodeEnum.ERROR);
+    }
+
+    public static <T> Result<T> fail(String message, T data) {
+        return Result.build(CodeEnum.ERROR, message, data);
+
     }
 
     public static Result doneMessage(String message) {
@@ -90,15 +100,6 @@ public class Result<T> {
 
     }
 
-    public static <T> Result<T> done(String message, T data) {
-        return Result.build(CodeEnum.SUCCESS, message, data);
-
-    }
-
-    public static <T> Result<T> fail(String message, T data) {
-        return Result.build(CodeEnum.ERROR, message, data);
-
-    }
 
     Result() {
     }
@@ -170,8 +171,8 @@ public class Result<T> {
     public enum CodeEnum {
         SUCCESS(1000, "[系统]操作成功"),
         ERROR(1001, "[系统]操作失败"),
-        EXCEPTION(1002,"[系统]服务异常"),
-        NOT_LOGIN(1100,"[系统]未登录");
+        EXCEPTION(1002, "[系统]服务异常"),
+        NOT_LOGIN(1100, "[系统]未登录");
 
         private Integer code;
         private String text;

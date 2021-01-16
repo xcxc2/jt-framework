@@ -39,7 +39,7 @@ public class TerminalSetController {
     @Autowired
     private CommandSender commandSender;
 
-    /**
+    /*
      * 设置终端参数 0x8103
      * jsonParams {
      * "terminalId":"",
@@ -56,9 +56,6 @@ public class TerminalSetController {
      * 0x0013 STRING 主服务器地址,IP或域名
      * 0x0017 STRING 备份服务器地址,IP或域名
      * 0x0018 DWORD 服务器TCP端口
-     *
-     * @return
-     * @throws Exception
      */
     @PostMapping("/set8103")
     public Object set8103(@RequestBody JSONObject params) throws Exception {
@@ -80,15 +77,15 @@ public class TerminalSetController {
             CommandMsg commandMsg = CommandMsg.of(terminalId, CLIENT_COMMON_REPLY, param);
             resp = commandSender.sendCommandAndWaitingForReply(commandMsg, timeout, TimeUnit.SECONDS);
             log.info("set8103 resp: {}", resp);
-            MockDbUtil.save("set8103",terminalId, dataArr.toJSONString());
+            MockDbUtil.save("set8103", terminalId, dataArr.toJSONString());
             return Result.doneData(resp);
         } catch (JtSessionNotFoundException e) {
             log.info("set8103 err: {}", e.getMessage(), e);
             return Result.failMessage("失败:设备未连接！");
-        }catch (Exception e) {
+        } catch (Exception e) {
 
             log.info("set8103 err: {}", e.getMessage(), e);
-            return Result.failMessage("失败:"+e.getClass().getSimpleName()+"-" + e.getMessage());
+            return Result.failMessage("失败:" + e.getClass().getSimpleName() + "-" + e.getMessage());
         }
 
     }

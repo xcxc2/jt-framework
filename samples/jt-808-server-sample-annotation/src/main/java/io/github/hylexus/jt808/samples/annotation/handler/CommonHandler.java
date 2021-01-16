@@ -50,10 +50,10 @@ public class CommonHandler {
         //065044634533
         //todo 记录注册信息 RegisterMsg，
         // 同时生成设备授权码 authCode, 保存到库中或redis中
-        String terminalId=header.getTerminalId();
-        String authCode=header.getTerminalId();
-        MockDbUtil.save("registerMsg",terminalId,authCode);
-        byte result=0;
+        String terminalId = header.getTerminalId();
+        String authCode = header.getTerminalId();
+        MockDbUtil.save("registerMsg", terminalId, authCode);
+        byte result = 0;
         return new RegisterReplyMsgBody(header.getFlowId(), result, authCode);
     }
 
@@ -74,10 +74,10 @@ public class CommonHandler {
         //todo 校验 设备标识和授权码是否存在，根据情况返回是否鉴权成功
         String terminalId = header.getTerminalId();
         String authCode = msgBody.getAuthCode();
-        MockDbUtil.save("authMsg",terminalId,authCode);
+        MockDbUtil.save("authMsg", terminalId, authCode);
 
         // return CommonReplyMsgBody.success(header.getFlowId(), BuiltinJt808MsgType.CLIENT_AUTH);
-        byte result=0;
+        byte result = 0;
         return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_AUTH.getMsgId(), result);
     }
 
@@ -102,10 +102,10 @@ public class CommonHandler {
         Double lng = msgBody.getLng();//经度
         Double lat = msgBody.getLat();//纬度
         String time = msgBody.getTime();
-        MockDbUtil.save("locationMsg",terminalId,time,lng,lat);
+        MockDbUtil.save("locationMsg", terminalId, time, lng, lat);
 
         // return CommonReplyMsgBody.success(header.getFlowId(), BuiltinJt808MsgType.CLIENT_LOCATION_INFO_UPLOAD);
-        byte result=0;
+        byte result = 0;
         return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_LOCATION_INFO_UPLOAD.getMsgId(), result);
     }
 
@@ -123,7 +123,7 @@ public class CommonHandler {
 
     @Jt808RequestMsgHandlerMapping(msgType = 0x0002)
     public ServerCommonReplyMsgBody processHeatBeatMsg(BuiltinEmptyRequestMsgBody heartBeatMsgBody, RequestMsgHeader header) {
-        byte result=0;
+        byte result = 0;
         return new ServerCommonReplyMsgBody(header.getFlowId(), CLIENT_HEART_BEAT.getMsgId(), result);
     }
 
@@ -141,7 +141,7 @@ public class CommonHandler {
     @Jt808RequestMsgHandlerMapping(msgType = 0x0104)
     public ServerCommonReplyMsgBody processMsg0104(Msg0104 msg, RequestMsgHeader header) {
         log.info("processMsg0104: {}", msg);
-        byte result=0;
+        byte result = 0;
         return new ServerCommonReplyMsgBody(header.getFlowId(), REQ_QUERY_LOCK_PARAM_REPLY.getMsgId(), result);
     }
 

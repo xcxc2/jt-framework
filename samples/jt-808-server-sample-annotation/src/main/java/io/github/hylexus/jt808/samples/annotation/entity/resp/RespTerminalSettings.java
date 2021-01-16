@@ -75,7 +75,7 @@ public class RespTerminalSettings {
         static {
             for (ItemType type : values()) {
                 mapping.put(type.msgId, type);
-                mapping2.put(HexStringUtils.int2HexString(type.msgId,4), type);
+                mapping2.put(HexStringUtils.int2HexString(type.msgId, 4), type);
             }
         }
 

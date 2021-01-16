@@ -14,11 +14,11 @@ public class TscUtil {
 
     /**
      * <p>
-     * 0x0001 DWORD ÖÕ¶ËÐÄÌø·¢ËÍ¼ä¸ô£¬µ¥Î»Îª£¨s£©
-     * 0x0010 STRING Ö÷·þÎñÆ÷ APN£¬ÎÞÏßÍ¨ÐÅ²¦ºÅ·ÃÎÊµã
-     * 0x0013 STRING Ö÷·þÎñÆ÷µØÖ·,IP»òÓòÃû
-     * 0x0017 STRING ±¸·Ý·þÎñÆ÷µØÖ·,IP»òÓòÃû
-     * 0x0018 DWORD ·þÎñÆ÷TCP¶Ë¿Ú
+     * 0x0001 DWORD ç»ˆç«¯å¿ƒè·³å‘é€é—´éš”ï¼Œå•ä½ä¸ºï¼ˆsï¼‰
+     * 0x0010 STRING ä¸»æœåŠ¡å™¨ APNï¼Œæ— çº¿é€šä¿¡æ‹¨å·è®¿é—®ç‚¹
+     * 0x0013 STRING ä¸»æœåŠ¡å™¨åœ°å€,IPæˆ–åŸŸå
+     * 0x0017 STRING å¤‡ä»½æœåŠ¡å™¨åœ°å€,IPæˆ–åŸŸå
+     * 0x0018 DWORD æœåŠ¡å™¨TCPç«¯å£
      * </p>
      * dataArr[ key: value:]
      */
