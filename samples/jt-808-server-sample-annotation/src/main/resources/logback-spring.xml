@@ -13,7 +13,7 @@
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/${log.file}.txt</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${log.file}.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <fileNamePattern>${log.path}/${log.file}.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
             <maxHistory>10</maxHistory>
             <maxFileSize>10MB</maxFileSize>
         </rollingPolicy>
@@ -24,7 +24,7 @@
     <appender name="file-db" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.path}/${log.file.db}.txt</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>${log.file.db}.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <fileNamePattern>${log.path}/${log.file.db}.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
             <maxHistory>10</maxHistory>
             <maxFileSize>10MB</maxFileSize>
         </rollingPolicy>
