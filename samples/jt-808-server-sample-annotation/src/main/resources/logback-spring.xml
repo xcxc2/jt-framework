@@ -33,12 +33,17 @@
         </encoder>
     </appender>
 
-    <logger name="mockdb" level="DEBUG">
-<!--        <appender-ref ref="console" />-->
+    <logger name="com.dudu.idb" level="DEBUG" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="file" />
+    </logger>
+
+    <logger name="mockdb" level="DEBUG" additivity="false">
+        <appender-ref ref="console" />
         <appender-ref ref="file-db" />
     </logger>
 
-    <root>
+    <root level="INFO">
         <appender-ref ref="console" />
         <appender-ref ref="file" />
     </root>

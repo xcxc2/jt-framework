@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mybatis 通用数据查询接口 -->
+<mapper namespace="com.dudu.idb.gps">
+    <!--是否开启缓存-->
+    <!--<cache  />-->
+
+    <!-- select id 即 dataType ，查询参数和输出参数都是Map结构  -->
+    <!-- 返回值最好通过SQL直接转成字符串格式，尤其是日期格式的  -->
+    <!-- ========================== test 相关 ==================================== -->
+<!--    65044634400  d.id,d.vehicle_number-->
+    <select id="driver_find"  resultType="com.alibaba.fastjson.JSONObject">
+        SELECT d.id,d.vehicle_number
+        FROM hy_driver d
+        where d.gps_num=#{gpsNum}
+    </select>
+    <update id="driver_update">
+        update hy_driver d set d.`lat`=#{lat},d.`lng`=#{lng}
+        where d.gps_num=#{gpsNum}
+    </update>
+    <insert id="trace_save"  >
+        insert into hy_driver_trajectory
+		(
+			`driver_id`,
+			`plate_number`,
+			`gps_id`,
+			`lat`,
+			`lon`,
+			`create_time`
+		)
+		values
+		(
+			#{driverId},
+			#{plateNumber},
+			#{gpsId},
+			#{lat},
+			#{lon},
+			#{createTime}
+		)
+    </insert>
+    <!-- ========================== 某某 相关 ==================================== -->
+
+</mapper>

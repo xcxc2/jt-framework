@@ -119,3 +119,6 @@ target/
 node_modules/
 # vue-press temp
 docs/pages/.vuepress/dist
+
+#log
+logs

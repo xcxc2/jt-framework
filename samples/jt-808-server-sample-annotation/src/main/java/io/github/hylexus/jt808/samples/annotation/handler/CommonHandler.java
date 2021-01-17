@@ -1,5 +1,6 @@
 package io.github.hylexus.jt808.samples.annotation.handler;
 
+import com.dudu.huoyun.service.DuduService;
 import io.github.hylexus.jt.annotation.msg.handler.Jt808ExceptionHandler;
 import io.github.hylexus.jt.annotation.msg.handler.Jt808RequestMsgHandler;
 import io.github.hylexus.jt.annotation.msg.handler.Jt808RequestMsgHandlerMapping;
@@ -42,6 +43,8 @@ public class CommonHandler {
 
     @Autowired
     private Jt808SessionManager jt808SessionManager;
+    @Autowired
+    private DuduService duduService;
 
     @Jt808RequestMsgHandlerMapping(msgType = 0x0100, desc = "终端注册")
     public RegisterReplyMsgBody processRegisterMsg(RegisterMsg msg, RequestMsgHeader header) {
@@ -103,6 +106,7 @@ public class CommonHandler {
         Double lat = msgBody.getLat();//纬度
         String time = msgBody.getTime();
         MockDbUtil.save("locationMsg", terminalId, time, lng, lat);
+        duduService.saveGPS(terminalId,lng,lat,time);
 
         // return CommonReplyMsgBody.success(header.getFlowId(), BuiltinJt808MsgType.CLIENT_LOCATION_INFO_UPLOAD);
         byte result = 0;

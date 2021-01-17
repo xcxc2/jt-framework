@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mybatis 通用数据查询接口 -->
+<mapper namespace="com.dudu.idb.code">
+    <!--是否开启缓存-->
+    <!--<cache  />-->
+
+    <!-- select id 即 dataType ，查询参数和输出参数都是Map结构  -->
+    <!-- 返回值最好通过SQL直接转成字符串格式，尤其是日期格式的  -->
+    <!-- ========================== test 相关 ==================================== -->
+    <select id="test"  resultType="java.util.Map">
+        select 'test'
+    </select>
+    <!-- ========================== ftp 相关 ==================================== -->
+    <select id="ftp_find"  resultType="java.util.Map">
+        select * from IRMS_DS_FTP t
+        where t.id=#{ftpId}
+    </select>
+    <!-- ========================== 某某 相关 ==================================== -->
+    <!-- ========================== 某某 相关 ==================================== -->
+    <!-- ========================== 某某 相关 ==================================== -->
+    <!-- ========================== 某某 相关 ==================================== -->
+
+</mapper>

@@ -2,6 +2,8 @@ package io.github.hylexus.jt808.samples.annotation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 
 /**
  * @author hylexus
@@ -9,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 //@EnableJt808ServerAutoConfig
+@ComponentScan({"com.dudu","io.github.hylexus.jt808"})
 public class Jt808ServerSampleAnnotationApplication {
 
     public static void main(String[] args) {
