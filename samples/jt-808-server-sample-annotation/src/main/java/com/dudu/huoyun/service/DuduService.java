@@ -18,6 +18,7 @@ public class DuduService {
     CmmDataService cmmDataService;
 
     public int saveGPS(String gpsNum, Double lng, Double lat, String time) {
+        if(lng==0D)return 0;
         String _lng = lng.toString();
         String _lat = lat.toString();
         //driver_id,d.vehicle_number
