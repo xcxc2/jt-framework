@@ -1,7 +1,9 @@
 package com.dudu.huoyun.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +16,8 @@ import java.util.Date;
  */
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DriverTrajectory implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -31,6 +35,8 @@ public class DriverTrajectory implements Serializable {
     private String lon;
     //创建时间
     private Date createTime;
+    //距离上次位置距离信息
+    private Double mileage;
 
 
 }

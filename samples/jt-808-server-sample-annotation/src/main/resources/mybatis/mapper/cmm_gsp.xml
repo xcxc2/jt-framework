@@ -19,6 +19,11 @@
         update hy_driver d set d.`lat`=#{lat},d.`lng`=#{lng}
         where d.gps_num=#{gpsNum}
     </update>
+	<select id="trace_find"  resultType="com.dudu.huoyun.domain.DriverTrajectory">
+        SELECT d.*
+        FROM hy_driver_trajectory d
+        where d.gps_id=#{gpsId}
+    </select>
     <insert id="trace_save"  >
         insert into hy_driver_trajectory
 		(
@@ -27,7 +32,8 @@
 			`gps_id`,
 			`lat`,
 			`lon`,
-			`create_time`
+			`create_time`,
+			`mileage`
 		)
 		values
 		(
@@ -36,9 +42,33 @@
 			#{gpsId},
 			#{lat},
 			#{lon},
-			#{createTime}
+			#{createTime},
+			#{mileage}
 		)
     </insert>
-    <!-- ========================== 某某 相关 ==================================== -->
+    <!-- ========================== 司机里程 相关 ==================================== -->
+	<select id="mileage_find"  resultType="com.dudu.huoyun.domain.DriverMileage">
+        SELECT d.*
+        FROM hy_driver_mileage d
+        where d.driver_id=#{driverId} and d.m_date=#{mDate}
+    </select>
+	<insert id="mileage_save"  >
+        insert into `hy_driver_mileage`
+		(
+			`driver_id`,
+			`m_date`,
+			`mileage`
+		)
+		values
+		(
+			#{driverId},
+			#{mDate},
+			#{mileage}
+		)
+    </insert>
+	<update id="mileage_update">
+        update hy_driver_mileage d set d.`mileage`=#{mileage}
+        where d.id=#{id}
+    </update>
 
 </mapper>
