@@ -57,11 +57,11 @@ public class DuduService {
         DriverMileage driverMileage =  findDriverMileage(driverId,curDate);
         if(driverMileage!=null){
             driverMileage.setMileage(driverMileage.getMileage()+mileage);
-            cmmDataService.update("mileage_update",driverMileage);
+            cmmDataService.update("gps_mileage_update",driverMileage);
         }else {
             driverMileage=DriverMileage.builder()
                     .driverId(driverId).mDate(curDate).mileage(mileage).build();
-            cmmDataService.insert("mileage_save",driverMileage);
+            cmmDataService.insert("gps_mileage_save",driverMileage);
         }
 
 
@@ -76,14 +76,14 @@ public class DuduService {
      */
     public DriverTrajectory findLastTrace(String gpsNum){
         DriverTrajectory query2 = DriverTrajectory.builder().gpsId(gpsNum).build();
-        return (DriverTrajectory) cmmDataService.findOne("trace_find", query2);
+        return (DriverTrajectory) cmmDataService.findOne("gps_trace_find", query2);
     }
 
     public DriverMileage findDriverMileage(Long driverId, Date mDate){
         DriverMileage query2 = DriverMileage.builder()
                 .driverId(driverId)
                 .mDate(mDate).build();
-        return (DriverMileage) cmmDataService.findOne("mileage_find", query2);
+        return (DriverMileage) cmmDataService.findOne("gps_mileage_find", query2);
     }
 
     private Date transTime(String time) {

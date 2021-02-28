@@ -22,7 +22,7 @@
 	<select id="trace_find"  resultType="com.dudu.huoyun.domain.DriverTrajectory">
         SELECT d.*
         FROM hy_driver_trajectory d
-        where d.gps_id=#{gpsId}
+        where d.gps_id=#{gpsId} order by d.id desc limit 1
     </select>
     <insert id="trace_save"  >
         insert into hy_driver_trajectory
