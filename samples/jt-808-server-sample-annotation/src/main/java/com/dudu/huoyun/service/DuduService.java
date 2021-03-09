@@ -5,6 +5,7 @@ import com.dudu.huoyun.domain.Driver;
 import com.dudu.huoyun.domain.DriverMileage;
 import com.dudu.huoyun.domain.DriverTrajectory;
 import com.dudu.huoyun.utils.GeoUtils;
+import com.dudu.huoyun.wsocket.LocationSocket;
 import com.dudu.idb.service.CmmDataService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.time.DateUtils;
@@ -20,10 +21,22 @@ public class DuduService {
     @Autowired
     CmmDataService cmmDataService;
 
+    @Autowired
+    LocationSocket locationSocket;
+
     public int saveGPS(String gpsNum, Double lng, Double lat, String time) {
         if(lng==0D)return 0;
         String _lng = lng.toString();
         String _lat = lat.toString();
+        //保存前先发送websocket，向前台推送
+        JSONObject message = new JSONObject();
+        message.put("gpsNum",gpsNum);
+        message.put("lng",_lng);
+        message.put("lat",lat);
+        message.put("time",time);
+        locationSocket.sendMessage(gpsNum,message.toJSONString());
+
+        //数据库保存相关定位信息
         //driver_id,d.vehicle_number
         Driver query = Driver.builder().gpsNum(gpsNum).build();
         JSONObject driver = (JSONObject) cmmDataService.findOne("gps_driver_find", query);

@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: dev
+  thymeleaf:
+    cache: false
 server:
   port: 8808
 jt808:
